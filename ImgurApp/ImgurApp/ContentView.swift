@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  ImgurApp
-//
-//  Created by Michele Apicella on 01/07/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {

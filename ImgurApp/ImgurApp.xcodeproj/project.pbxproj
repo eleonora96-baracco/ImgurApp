@@ -14,6 +14,8 @@
 		73CD435B2C327E7D00467D82 /* ImgurAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD435A2C327E7D00467D82 /* ImgurAppTests.swift */; };
 		73CD43652C327E7E00467D82 /* ImgurAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43642C327E7E00467D82 /* ImgurAppUITests.swift */; };
 		73CD43672C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43662C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift */; };
+		73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43762C3284C900467D82 /* ImgurImage.swift */; };
+		73CD43792C32851500467D82 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43782C32851500467D82 /* IdentifiableError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		73CD43602C327E7E00467D82 /* ImgurAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImgurAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73CD43642C327E7E00467D82 /* ImgurAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAppUITests.swift; sourceTree = "<group>"; };
 		73CD43662C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		73CD43762C3284C900467D82 /* ImgurImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImage.swift; sourceTree = "<group>"; };
+		73CD43782C32851500467D82 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 		73CD43732C327F4500467D82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				73CD43762C3284C900467D82 /* ImgurImage.swift */,
+				73CD43782C32851500467D82 /* IdentifiableError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +287,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CD43792C32851500467D82 /* IdentifiableError.swift in Sources */,
+				73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */,
 				73CD434C2C327E7B00467D82 /* ContentView.swift in Sources */,
 				73CD434A2C327E7B00467D82 /* ImgurAppApp.swift in Sources */,
 			);
