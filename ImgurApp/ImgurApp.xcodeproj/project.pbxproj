@@ -16,6 +16,9 @@
 		73CD43672C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43662C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift */; };
 		73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43762C3284C900467D82 /* ImgurImage.swift */; };
 		73CD43792C32851500467D82 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43782C32851500467D82 /* IdentifiableError.swift */; };
+		73CD437C2C3288DB00467D82 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD437B2C3288DB00467D82 /* KeychainHelper.swift */; };
+		73CD43802C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD437F2C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift */; };
+		73CD43822C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43812C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		73CD43662C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		73CD43762C3284C900467D82 /* ImgurImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImage.swift; sourceTree = "<group>"; };
 		73CD43782C32851500467D82 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
+		73CD437B2C3288DB00467D82 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		73CD437F2C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAuthenticationServiceInteractor.swift; sourceTree = "<group>"; };
+		73CD43812C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImageFetchingServiceInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,8 @@
 		73CD43482C327E7B00467D82 /* ImgurApp */ = {
 			isa = PBXGroup;
 			children = (
+				73CD437D2C3289A100467D82 /* Interactors */,
+				73CD437A2C3288AD00467D82 /* Helpers */,
 				73CD43752C327F6200467D82 /* Views */,
 				73CD43742C327F4F00467D82 /* ViewModels */,
 				73CD43732C327F4500467D82 /* Models */,
@@ -155,6 +163,23 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		73CD437A2C3288AD00467D82 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				73CD437B2C3288DB00467D82 /* KeychainHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		73CD437D2C3289A100467D82 /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				73CD437F2C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift */,
+				73CD43812C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift */,
+			);
+			path = Interactors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,9 +313,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				73CD43792C32851500467D82 /* IdentifiableError.swift in Sources */,
+				73CD43802C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift in Sources */,
 				73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */,
 				73CD434C2C327E7B00467D82 /* ContentView.swift in Sources */,
+				73CD437C2C3288DB00467D82 /* KeychainHelper.swift in Sources */,
 				73CD434A2C327E7B00467D82 /* ImgurAppApp.swift in Sources */,
+				73CD43822C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
