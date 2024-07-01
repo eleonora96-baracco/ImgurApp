@@ -19,6 +19,12 @@
 		73CD437C2C3288DB00467D82 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD437B2C3288DB00467D82 /* KeychainHelper.swift */; };
 		73CD43802C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD437F2C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift */; };
 		73CD43822C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43812C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift */; };
+		73CD43842C32C80F00467D82 /* PhotoGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43832C32C80F00467D82 /* PhotoGalleryViewModel.swift */; };
+		73CD43862C32C88200467D82 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43852C32C88200467D82 /* AuthViewModel.swift */; };
+		73CD43882C32C9BC00467D82 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43872C32C9BC00467D82 /* LoginView.swift */; };
+		73CD438A2C32C9EC00467D82 /* PhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43892C32C9EC00467D82 /* PhotoGalleryView.swift */; };
+		73CD438C2C32CD9D00467D82 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD438B2C32CD9D00467D82 /* ContentViewModel.swift */; };
+		73CD438E2C32CE9800467D82 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD438D2C32CE9800467D82 /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +60,13 @@
 		73CD437B2C3288DB00467D82 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		73CD437F2C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAuthenticationServiceInteractor.swift; sourceTree = "<group>"; };
 		73CD43812C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImageFetchingServiceInteractor.swift; sourceTree = "<group>"; };
+		73CD43832C32C80F00467D82 /* PhotoGalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewModel.swift; sourceTree = "<group>"; };
+		73CD43852C32C88200467D82 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		73CD43872C32C9BC00467D82 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		73CD43892C32C9EC00467D82 /* PhotoGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryView.swift; sourceTree = "<group>"; };
+		73CD438B2C32CD9D00467D82 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		73CD438D2C32CE9800467D82 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		73CD438F2C32CEE800467D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +117,7 @@
 		73CD43482C327E7B00467D82 /* ImgurApp */ = {
 			isa = PBXGroup;
 			children = (
+				73CD438F2C32CEE800467D82 /* Info.plist */,
 				73CD437D2C3289A100467D82 /* Interactors */,
 				73CD437A2C3288AD00467D82 /* Helpers */,
 				73CD43752C327F6200467D82 /* Views */,
@@ -154,6 +168,9 @@
 		73CD43742C327F4F00467D82 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				73CD43832C32C80F00467D82 /* PhotoGalleryViewModel.swift */,
+				73CD43852C32C88200467D82 /* AuthViewModel.swift */,
+				73CD438B2C32CD9D00467D82 /* ContentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -161,6 +178,9 @@
 		73CD43752C327F6200467D82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				73CD43872C32C9BC00467D82 /* LoginView.swift */,
+				73CD43892C32C9EC00467D82 /* PhotoGalleryView.swift */,
+				73CD438D2C32CE9800467D82 /* CameraView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,11 +334,17 @@
 			files = (
 				73CD43792C32851500467D82 /* IdentifiableError.swift in Sources */,
 				73CD43802C328A3900467D82 /* ImgurAuthenticationServiceInteractor.swift in Sources */,
+				73CD438E2C32CE9800467D82 /* CameraView.swift in Sources */,
 				73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */,
 				73CD434C2C327E7B00467D82 /* ContentView.swift in Sources */,
+				73CD43842C32C80F00467D82 /* PhotoGalleryViewModel.swift in Sources */,
 				73CD437C2C3288DB00467D82 /* KeychainHelper.swift in Sources */,
 				73CD434A2C327E7B00467D82 /* ImgurAppApp.swift in Sources */,
 				73CD43822C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift in Sources */,
+				73CD438C2C32CD9D00467D82 /* ContentViewModel.swift in Sources */,
+				73CD43882C32C9BC00467D82 /* LoginView.swift in Sources */,
+				73CD438A2C32C9EC00467D82 /* PhotoGalleryView.swift in Sources */,
+				73CD43862C32C88200467D82 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +510,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ImgurApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImgurApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -512,6 +539,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ImgurApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImgurApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

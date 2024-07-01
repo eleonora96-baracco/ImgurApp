@@ -1,61 +1,56 @@
 import Foundation
 
 protocol AuthenticationServiceProtocol {
+    var isLoggedIn: Bool { get }
+    var accessToken: String? { get }
+    
     func startOAuthFlow() -> URL
-    func handleOAuthCallback(url: URL) -> Result<Void, IdentifiableError>
+    func handleOAuthCallback(url: URL, completion: @escaping (Result<String, Error>) -> Void)
     func logout()
 }
 
 
 class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
-    private let clientId = "YOUR_IMGUR_CLIENT_ID"
+    private let clientId = "2074a13d9af00d6"
     private let authorizationEndpoint = "https://api.imgur.com/oauth2/authorize"
-    private let redirectUri = "myapp://auth"
     private let keychainKey = "imgurAccessToken"
 
-    var accessToken: String? {
-        get {
-            return KeychainHelper.shared.read(forKey: keychainKey)
-        }
-        set {
-            if let newValue = newValue {
-                KeychainHelper.shared.save(newValue, forKey: keychainKey)
-            } else {
-                KeychainHelper.shared.delete(forKey: keychainKey)
-            }
-        }
-    }
-
     var isLoggedIn: Bool {
-        return accessToken != nil
-    }
+            return accessToken != nil
+        }
+        
+        var accessToken: String? {
+            return KeychainHelper.shared.get(forKey: keychainKey)
+        }
 
     func startOAuthFlow() -> URL {
-        let authURL = "\(authorizationEndpoint)?client_id=\(clientId)&response_type=token&state=APPLICATION_STATE&redirect_uri=\(redirectUri)"
+        let authURL = "\(authorizationEndpoint)?client_id=\(clientId)&response_type=token&state=APPLICATION_STATE"
         return URL(string: authURL)!
     }
 
-    func handleOAuthCallback(url: URL) -> Result<Void, IdentifiableError> {
-        guard let fragment = url.fragment else {
-            return .failure(IdentifiableError(message: "Invalid URL"))
+    func handleOAuthCallback(url: URL, completion: @escaping (Result<String, Error>) -> Void) {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let fragment = components.fragment else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
         }
         
-        let params = fragment.split(separator: "&").reduce(into: [String: String]()) { result, param in
-            let parts = param.split(separator: "=")
-            if parts.count == 2 {
-                result[String(parts[0])] = String(parts[1])
+        let params = fragment.split(separator: "&").reduce(into: [String: String]()) { result, part in
+            let pair = part.split(separator: "=")
+            if pair.count == 2 {
+                result[String(pair[0])] = String(pair[1])
             }
         }
         
-        if let token = params["access_token"] {
-            self.accessToken = token
-            return .success(())
+        if let accessToken = params["access_token"] {
+            KeychainHelper.shared.save(accessToken, forKey: keychainKey)
+            completion(.success(accessToken))
         } else {
-            return .failure(IdentifiableError(message: "No access token found"))
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Access token not found"])))
         }
     }
-
+    
     func logout() {
-        accessToken = nil
+        UserDefaults.standard.removeObject(forKey: keychainKey)
     }
 }

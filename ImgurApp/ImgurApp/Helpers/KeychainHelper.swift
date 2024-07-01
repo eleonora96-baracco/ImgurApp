@@ -3,44 +3,52 @@ import Security
 
 class KeychainHelper {
     static let shared = KeychainHelper()
+    
+    private init() {}
+    
+    func save(_ value: String, forKey key: String) {
+        guard let data = value.data(using: .utf8) else { return }
 
-    func save(_ data: String, forKey key: String) {
-        let data = Data(data.utf8)
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key,
             kSecValueData: data
-        ] as [String : Any]
+        ] as CFDictionary
 
-        SecItemDelete(query as CFDictionary)
-        SecItemAdd(query as CFDictionary, nil)
+        SecItemDelete(query)
+        let status = SecItemAdd(query, nil)
+        if status != errSecSuccess {
+            print("Error saving to keychain: \(status)")
+        }
     }
 
-    func read(forKey key: String) -> String? {
+    func get(forKey key: String) -> String? {
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key,
             kSecReturnData: true,
             kSecMatchLimit: kSecMatchLimitOne
-        ] as [String : Any]
+        ] as CFDictionary
 
         var dataTypeRef: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-
-        if status == noErr {
-            if let data = dataTypeRef as? Data {
-                return String(data: data, encoding: .utf8)
-            }
+        let status = SecItemCopyMatching(query, &dataTypeRef)
+        if status == errSecSuccess, let data = dataTypeRef as? Data, let value = String(data: data, encoding: .utf8) {
+            return value
+        } else {
+            print("Error retrieving from keychain: \(status)")
+            return nil
         }
-        return nil
     }
 
     func delete(forKey key: String) {
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key
-        ] as [String : Any]
+        ] as CFDictionary
 
-        SecItemDelete(query as CFDictionary)
+        let status = SecItemDelete(query)
+        if status != errSecSuccess {
+            print("Error deleting from keychain: \(status)")
+        }
     }
 }

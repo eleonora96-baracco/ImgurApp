@@ -1,14 +1,78 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var authViewModel = AuthViewModel(authenticationService: ImgurAuthenticationServiceInteractor())
+    @StateObject var photoGalleryViewModel: PhotoGalleryViewModel
+    @StateObject var contentViewModel: ContentViewModel
+
+    @State private var isShowingCamera = false
+    @State private var isShowingFileImporter = false
+
+    init() {
+        let authService = ImgurAuthenticationServiceInteractor()
+        let imageFetchingService = ImgurImageFetchingServiceInteractor()
+        _photoGalleryViewModel = StateObject(wrappedValue: PhotoGalleryViewModel(imageFetchingServiceInteractor: ImgurImageFetchingServiceInteractor(), accessToken: authService.accessToken))
+        _contentViewModel = StateObject(wrappedValue: ContentViewModel(imageFetchingService: imageFetchingService, accessToken: authService.accessToken))
+    }
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            if authViewModel.isLoggedIn {
+                VStack {
+                    PhotoGalleryView(viewModel: photoGalleryViewModel)
+
+                    Button("Open Camera") {
+                        isShowingCamera = true
+                    }
+                    .padding()
+                    .sheet(isPresented: $isShowingCamera) {
+                        CameraView(image: $contentViewModel.selectedImage)
+                    }
+
+                    Button("Open File Explorer") {
+                        isShowingFileImporter = true
+                    }
+                    .padding()
+                    .fileImporter(
+                        isPresented: $isShowingFileImporter,
+                        allowedContentTypes: [.image],
+                        allowsMultipleSelection: false
+                    ) { result in
+                        contentViewModel.handleFileImport(result: result)
+                    }
+                }
+                .navigationTitle("Photo Gallery")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            authViewModel.logout()
+                        }) {
+                            Text("Logout")
+                        }
+                    }
+                }
+                .onChange(of: contentViewModel.selectedImage) { newImage in
+                    if let newImage = newImage {
+                        contentViewModel.uploadImage { result in
+                            switch result {
+                                case .success(let imgurImage):
+                                    photoGalleryViewModel.addPhoto(imgurImage)
+                                case .failure(let error):
+                                    contentViewModel.errorMessage = error
+                            }
+                        }
+                    }
+                }
+            } else {
+                LoginView(authViewModel: authViewModel)
+            }
         }
-        .padding()
+        .alert(item: $authViewModel.errorMessage) { error in
+            Alert(title: Text("Error"), message: Text(error.message), dismissButton: .default(Text("OK")))
+        }
+        .alert(item: $contentViewModel.errorMessage) { error in
+            Alert(title: Text("Error"), message: Text(error.message), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
