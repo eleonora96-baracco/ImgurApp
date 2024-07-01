@@ -33,10 +33,10 @@ struct PhotoGalleryView: View {
                 }
             }
 
-            Button("Fetch Photos") {
-                viewModel.fetchPhotos()
-            }
-            .padding()
+//            Button("Fetch Photos") {
+//                viewModel.fetchPhotos()
+//            }
+//            .padding()
         }
         .alert(item: $viewModel.errorMessage) { error in
             Alert(title: Text("Error"), message: Text(error.message), dismissButton: .default(Text("OK")))

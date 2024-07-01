@@ -3,6 +3,7 @@ import UIKit
 
 class ContentViewModel: ObservableObject {
     @Published var selectedImage: UIImage?
+    @Published var selectedImage1: Data?
     @Published var errorMessage: IdentifiableError?
 
     private let imageFetchingService: ImageFetchingServiceProtocol
@@ -14,17 +15,25 @@ class ContentViewModel: ObservableObject {
     }
 
     func uploadImage(completion: @escaping (Result<ImgurImage, IdentifiableError>) -> Void) {
-        guard let selectedImage = selectedImage, let accessToken = accessToken else {
+//        guard let selectedImage = selectedImage, let accessToken = accessToken else {
+//            completion(.failure(IdentifiableError(message: "No image selected or user not authenticated")))
+//            return
+//        }
+        
+        guard let selectedImage1 = selectedImage1 else {
             completion(.failure(IdentifiableError(message: "No image selected or user not authenticated")))
             return
         }
+        
+        let image = UIImage(data: selectedImage1)
 
-        guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+        guard let imageData = image!.jpegData(compressionQuality: 0.8) else {
             completion(.failure(IdentifiableError(message: "Failed to convert image to data")))
             return
         }
+        
 
-        imageFetchingService.uploadPhoto(accessToken: accessToken, imageData: imageData) { result in
+        imageFetchingService.uploadPhoto(accessToken: accessToken!, imageData: imageData) { result in
             DispatchQueue.main.async {
                 switch result {
                     case .success(let imgurImage):

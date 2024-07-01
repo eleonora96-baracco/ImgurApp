@@ -33,12 +33,8 @@ struct ContentView: View {
                         isShowingFileImporter = true
                     }
                     .padding()
-                    .fileImporter(
-                        isPresented: $isShowingFileImporter,
-                        allowedContentTypes: [.image],
-                        allowsMultipleSelection: false
-                    ) { result in
-                        contentViewModel.handleFileImport(result: result)
+                    .sheet(isPresented: $isShowingFileImporter) {
+                        PhotoPickersView(image: $contentViewModel.selectedImage1)
                     }
                 }
                 .navigationTitle("Photo Gallery")
@@ -51,8 +47,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .onChange(of: contentViewModel.selectedImage) { newImage in
-                    if let newImage = newImage {
+                .onChange(of: contentViewModel.selectedImage1) { 
                         contentViewModel.uploadImage { result in
                             switch result {
                                 case .success(let imgurImage):
@@ -60,7 +55,6 @@ struct ContentView: View {
                                 case .failure(let error):
                                     contentViewModel.errorMessage = error
                             }
-                        }
                     }
                 }
             } else {

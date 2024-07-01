@@ -45,8 +45,39 @@ class ImgurImageFetchingServiceInteractor: ImageFetchingServiceProtocol {
         var request = URLRequest(url: url)
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.httpMethod = "POST"
-        request.httpBody = imageData
-        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var body = Data()
+        let lineBreak = "\r\n"
+        
+        // Add image data to body
+        body.append("--\(boundary)\(lineBreak)")
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\(lineBreak)")
+        body.append("Content-Type: image/jpeg\(lineBreak)\(lineBreak)")
+        body.append(imageData)
+        body.append(lineBreak)
+        
+        // Add type field to body
+        body.append("--\(boundary)\(lineBreak)")
+        body.append("Content-Disposition: form-data; name=\"type\"\(lineBreak)\(lineBreak)")
+        body.append("image\(lineBreak)")
+        
+        // Add title field to body
+        body.append("--\(boundary)\(lineBreak)")
+        body.append("Content-Disposition: form-data; name=\"title\"\(lineBreak)\(lineBreak)")
+        body.append("Simple upload\(lineBreak)")
+        
+        // Add description field to body
+        body.append("--\(boundary)\(lineBreak)")
+        body.append("Content-Disposition: form-data; name=\"description\"\(lineBreak)\(lineBreak)")
+        body.append("This is a simple image upload in Imgur\(lineBreak)")
+        
+        // End of body
+        body.append("--\(boundary)--\(lineBreak)")
+        
+        request.httpBody = body
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -60,11 +91,11 @@ class ImgurImageFetchingServiceInteractor: ImageFetchingServiceProtocol {
             }
 
             do {
-                let imgurResponse = try JSONDecoder().decode(ImgurImageResponse.self, from: data)
-                if let image = imgurResponse.data.first {
-                    completion(.success(image))
+                let imgurResponse = try JSONDecoder().decode(ImgurImageUploadResponse.self, from: data)
+                if imgurResponse.success {
+                    completion(.success(imgurResponse.data))
                 } else {
-                    completion(.failure(IdentifiableError(message: "Image upload failed")))
+                    completion(.failure(IdentifiableError(message: "Image upload failed with status: \(imgurResponse.status)")))
                 }
             } catch {
                 completion(.failure(error))
@@ -74,3 +105,11 @@ class ImgurImageFetchingServiceInteractor: ImageFetchingServiceProtocol {
 }
 
 
+// Extension to append string data to Data
+extension Data {
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
+    }
+}

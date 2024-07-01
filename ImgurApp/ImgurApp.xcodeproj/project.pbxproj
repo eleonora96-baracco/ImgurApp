@@ -25,6 +25,7 @@
 		73CD438A2C32C9EC00467D82 /* PhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43892C32C9EC00467D82 /* PhotoGalleryView.swift */; };
 		73CD438C2C32CD9D00467D82 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD438B2C32CD9D00467D82 /* ContentViewModel.swift */; };
 		73CD438E2C32CE9800467D82 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD438D2C32CE9800467D82 /* CameraView.swift */; };
+		73CD43912C33019900467D82 /* PhotoPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43902C33019900467D82 /* PhotoPickersView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		73CD438B2C32CD9D00467D82 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		73CD438D2C32CE9800467D82 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		73CD438F2C32CEE800467D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		73CD43902C33019900467D82 /* PhotoPickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickersView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				73CD43872C32C9BC00467D82 /* LoginView.swift */,
 				73CD43892C32C9EC00467D82 /* PhotoGalleryView.swift */,
 				73CD438D2C32CE9800467D82 /* CameraView.swift */,
+				73CD43902C33019900467D82 /* PhotoPickersView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				73CD438E2C32CE9800467D82 /* CameraView.swift in Sources */,
 				73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */,
 				73CD434C2C327E7B00467D82 /* ContentView.swift in Sources */,
+				73CD43912C33019900467D82 /* PhotoPickersView.swift in Sources */,
 				73CD43842C32C80F00467D82 /* PhotoGalleryViewModel.swift in Sources */,
 				73CD437C2C3288DB00467D82 /* KeychainHelper.swift in Sources */,
 				73CD434A2C327E7B00467D82 /* ImgurAppApp.swift in Sources */,
