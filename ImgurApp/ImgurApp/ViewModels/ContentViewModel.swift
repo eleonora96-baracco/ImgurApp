@@ -14,13 +14,8 @@ class ContentViewModel: ObservableObject {
         self.accessToken = accessToken
     }
 
-    func uploadImage(completion: @escaping (Result<ImgurImage, IdentifiableError>) -> Void) {
-//        guard let selectedImage = selectedImage, let accessToken = accessToken else {
-//            completion(.failure(IdentifiableError(message: "No image selected or user not authenticated")))
-//            return
-//        }
-        
-        guard let selectedImage1 = selectedImage1 else {
+    func uploadImage(completion: @escaping (Result<ImgurImage, IdentifiableError>) -> Void) {        
+        guard let selectedImage1 = selectedImage1, let accessToken = accessToken else {
             completion(.failure(IdentifiableError(message: "No image selected or user not authenticated")))
             return
         }
@@ -33,7 +28,7 @@ class ContentViewModel: ObservableObject {
         }
         
 
-        imageFetchingService.uploadPhoto(accessToken: accessToken!, imageData: imageData) { result in
+        imageFetchingService.uploadPhoto(accessToken: accessToken, imageData: imageData) { result in
             DispatchQueue.main.async {
                 switch result {
                     case .success(let imgurImage):

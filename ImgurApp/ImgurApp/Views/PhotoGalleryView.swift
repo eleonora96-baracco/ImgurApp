@@ -12,10 +12,10 @@ struct PhotoGalleryView: View {
                 List {
                     ForEach(viewModel.photos) { photo in
                         VStack {
-                            if let title = photo.title {
-                                Text(title)
-                                    .font(.headline)
-                            }
+//                            if let title = photo.title {
+//                                Text(title)
+//                                    .font(.headline)
+//                            }
                             AsyncImage(url: URL(string: photo.link)) { image in
                                 image
                                     .resizable()

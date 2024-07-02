@@ -6,7 +6,7 @@ struct ContentView: View {
     @StateObject var contentViewModel: ContentViewModel
 
     @State private var isShowingCamera = false
-    @State private var isShowingFileImporter = false
+    @State private var isShowingPhotoPicker = false
 
     init() {
         let authService = ImgurAuthenticationServiceInteractor()
@@ -29,12 +29,12 @@ struct ContentView: View {
                         CameraView(image: $contentViewModel.selectedImage)
                     }
 
-                    Button("Open File Explorer") {
-                        isShowingFileImporter = true
+                    Button("Upload an image") {
+                        isShowingPhotoPicker = true
                     }
                     .padding()
-                    .sheet(isPresented: $isShowingFileImporter) {
-                        PhotoPickersView(image: $contentViewModel.selectedImage1)
+                    .sheet(isPresented: $isShowingPhotoPicker) {
+                        PhotoPickersView(image: $contentViewModel.selectedImage1, isPresented: $isShowingPhotoPicker)
                     }
                 }
                 .navigationTitle("Photo Gallery")
