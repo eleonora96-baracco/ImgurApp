@@ -8,11 +8,10 @@ struct ContentView: View {
     @State private var isShowingCamera = false
     @State private var isShowingPhotoPicker = false
 
-    init() {
-        let authService = ImgurAuthenticationServiceInteractor()
-        let imageFetchingService = ImgurImageFetchingServiceInteractor()
-        _photoGalleryViewModel = StateObject(wrappedValue: PhotoGalleryViewModel(imageFetchingServiceInteractor: ImgurImageFetchingServiceInteractor(), accessToken: authService.accessToken))
-        _imagePickerViewModel = StateObject(wrappedValue: ImagePickerViewModel(imageFetchingService: imageFetchingService, accessToken: authService.accessToken))
+    init(authViewModel: AuthViewModel, photoGalleryViewModel: PhotoGalleryViewModel, imagePickerViewModel: ImagePickerViewModel) {
+        _authViewModel = StateObject(wrappedValue: authViewModel)
+        _photoGalleryViewModel = StateObject(wrappedValue: photoGalleryViewModel)
+        _imagePickerViewModel = StateObject(wrappedValue: imagePickerViewModel)
     }
 
     var body: some View {
@@ -70,6 +69,3 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
