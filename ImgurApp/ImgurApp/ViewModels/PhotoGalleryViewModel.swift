@@ -34,9 +34,17 @@ class PhotoGalleryViewModel: ObservableObject {
     }
 
     func removePhoto(at index: Int) {
-        guard photos.indices.contains(index) else { return }
-        DispatchQueue.main.async {
-            self.photos.remove(at: index)
+        guard index < photos.count else { return }
+        let photo = photos[index]
+        imageFetchingServiceInteractor.deletePhoto(accessToken: accessToken, photoId: photo.id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.photos.remove(at: index)
+                case .failure(let error):
+                    self.errorMessage = IdentifiableError(message: error.localizedDescription)
+                }
+            }
         }
     }
 }

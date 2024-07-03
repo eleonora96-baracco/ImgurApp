@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PhotoGalleryView: View {
     @ObservedObject var viewModel: PhotoGalleryViewModel
-
+    
     var body: some View {
         VStack {
             if viewModel.photos.isEmpty {
@@ -12,10 +12,6 @@ struct PhotoGalleryView: View {
                 List {
                     ForEach(viewModel.photos) { photo in
                         VStack {
-//                            if let title = photo.title {
-//                                Text(title)
-//                                    .font(.headline)
-//                            }
                             AsyncImage(url: URL(string: photo.link)) { image in
                                 image
                                     .resizable()
@@ -33,10 +29,9 @@ struct PhotoGalleryView: View {
                 }
             }
 
-//            Button("Fetch Photos") {
-//                viewModel.fetchPhotos()
-//            }
-//            .padding()
+        }
+        .onAppear {
+            viewModel.fetchPhotos()
         }
         .alert(item: $viewModel.errorMessage) { error in
             Alert(title: Text("Error"), message: Text(error.message), dismissButton: .default(Text("OK")))

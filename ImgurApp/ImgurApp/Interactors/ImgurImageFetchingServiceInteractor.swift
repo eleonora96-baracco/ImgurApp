@@ -3,6 +3,7 @@ import Foundation
 protocol ImageFetchingServiceProtocol {
     func fetchPhotos(accessToken: String, completion: @escaping (Result<[ImgurImage], Error>) -> Void)
     func uploadPhoto(accessToken: String, imageData: Data, completion: @escaping (Result<ImgurImage, Error>) -> Void)
+    func deletePhoto(accessToken: String?, photoId: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class ImgurImageFetchingServiceInteractor: ImageFetchingServiceProtocol {
@@ -100,6 +101,36 @@ class ImgurImageFetchingServiceInteractor: ImageFetchingServiceProtocol {
             } catch {
                 completion(.failure(error))
             }
+        }.resume()
+    }
+    
+    func deletePhoto(accessToken: String?, photoId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let accessToken = accessToken else {
+            completion(.failure(IdentifiableError(message: "No access token provided")))
+            return
+        }
+
+        guard let url = URL(string: "https://api.imgur.com/3/image/\(photoId)") else {
+            completion(.failure(IdentifiableError(message: "Invalid URL")))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                completion(.failure(IdentifiableError(message: "Failed to delete photo")))
+                return
+            }
+
+            completion(.success(()))
         }.resume()
     }
 }
