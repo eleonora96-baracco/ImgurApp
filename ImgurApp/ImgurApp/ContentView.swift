@@ -21,7 +21,6 @@ struct ContentView: View {
                     PhotoGalleryView(viewModel: photoGalleryViewModel)
                     bottomView
                 }
-                .navigationBarBackButtonHidden(true)
                 .shadow(radius: 5)
                 .background(Color.baseGreen)
                 .sheet(isPresented: $isShowingCamera) {
@@ -48,11 +47,11 @@ struct ContentView: View {
                 }
             } else {
                 LoginView(authViewModel: authViewModel)
+                .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
             }
         }
         .background(Color.customWhite)
-//        .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
-//        .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
+        
     }
     
     @ViewBuilder private var bottomView: some View {

@@ -1,7 +1,6 @@
 import PhotosUI
 import SwiftUI
 
-
 struct PhotoPickersView: View {
     
     @State private var pickerItem: PhotosPickerItem?
@@ -11,30 +10,47 @@ struct PhotoPickersView: View {
     
     var body: some View {
         VStack {
-            HStack() {
+            HStack {
                 PhotosPicker("Select a picture", selection: $pickerItem, matching: .images)
                 Spacer()
                 Button("Upload") {
                     Task {
-                        let data = try await pickerItem?.loadTransferable(type: Data.self)
-                        imagePickerViewModel.selectImageFromFile(data)
+                        if let data = try? await pickerItem?.loadTransferable(type: Data.self) {
+                            imagePickerViewModel.selectImageFromFile(data)
+                        }
+                        isPresented = false
                     }
-                    isPresented = false
                 }
+                .disabled(selectedImage == nil)
+                .padding()
+                .background(selectedImage == nil ? .customCream : .customGreen)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
             }
             .padding()
             .foregroundStyle(.darkGreen)
             .onChange(of: pickerItem) {
                 Task {
-                    selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
+                    if let image = try? await pickerItem?.loadTransferable(type: Image.self) {
+                        selectedImage = image
+                    }
                 }
             }
-            selectedImage?
-                .resizable()
-                .scaledToFit()
+            
+            if let image = selectedImage {
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+            } else {
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .foregroundColor(.customCream)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.customWhite)
+        .background(Color.customWhite)
     }
 }
-
