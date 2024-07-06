@@ -9,14 +9,14 @@ struct LoginView: View {
             Text("Imgur Login")
                 .font(.largeTitle)
                 .padding()
-                .foregroundColor(.customGreen)
+                .foregroundColor(.darkGreen)
             
             Button("Login with Imgur") {
                 let authURL = authViewModel.startOAuthFlow()
                 UIApplication.shared.open(authURL)
             }
             .padding()
-            .background(Color.customGreen)
+            .background(.customGreen)
             .foregroundColor(.white)
             .cornerRadius(10)
             

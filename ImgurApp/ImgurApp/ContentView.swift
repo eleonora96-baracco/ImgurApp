@@ -21,14 +21,17 @@ struct ContentView: View {
                     PhotoGalleryView(viewModel: photoGalleryViewModel)
                     bottomView
                 }
+                .navigationBarBackButtonHidden(true)
+                .shadow(radius: 5)
                 .background(Color.baseGreen)
                 .sheet(isPresented: $isShowingCamera) {
                     CameraView(imagePickerViewModel: imagePickerViewModel)
+                    .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
                 }
                 .sheet(isPresented: $isShowingPhotoPicker) {
                     PhotoPickersView(isPresented: $isShowingPhotoPicker, imagePickerViewModel: imagePickerViewModel)
+                    .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
                 }
-                .navigationBarBackButtonHidden(true)
                 .navigationTitle("Photo Gallery")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -48,8 +51,8 @@ struct ContentView: View {
             }
         }
         .background(Color.customWhite)
-        .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
-        .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
+//        .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
+//        .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
     }
     
     @ViewBuilder private var bottomView: some View {

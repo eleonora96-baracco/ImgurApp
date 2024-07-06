@@ -11,22 +11,30 @@ struct PhotoPickersView: View {
     
     var body: some View {
         VStack {
-            PhotosPicker("Select a picture to upload", selection: $pickerItem, matching: .images)
-        }
-        .foregroundStyle(.darkGreen)
-        .onChange(of: pickerItem) {
-            Task {
-//                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
-                let data = try await pickerItem?.loadTransferable(type: Data.self)
-                imagePickerViewModel.selectImageFromFile(data)
-                isPresented = false
+            HStack() {
+                PhotosPicker("Select a picture", selection: $pickerItem, matching: .images)
+                Spacer()
+                Button("Upload") {
+                    Task {
+                        let data = try await pickerItem?.loadTransferable(type: Data.self)
+                        imagePickerViewModel.selectImageFromFile(data)
+                    }
+                    isPresented = false
+                }
             }
+            .padding()
+            .foregroundStyle(.darkGreen)
+            .onChange(of: pickerItem) {
+                Task {
+                    selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
+                }
+            }
+            selectedImage?
+                .resizable()
+                .scaledToFit()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.customWhite)
-//        selectedImage?
-//            .resizable()
-//            .scaledToFit()
     }
 }
 
