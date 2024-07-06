@@ -13,17 +13,20 @@ struct PhotoPickersView: View {
         VStack {
             PhotosPicker("Select a picture to upload", selection: $pickerItem, matching: .images)
         }
+        .foregroundStyle(.darkGreen)
         .onChange(of: pickerItem) {
             Task {
-                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
+//                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
                 let data = try await pickerItem?.loadTransferable(type: Data.self)
                 imagePickerViewModel.selectImageFromFile(data)
                 isPresented = false
             }
         }
-        selectedImage?
-            .resizable()
-            .scaledToFit()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.customWhite)
+//        selectedImage?
+//            .resizable()
+//            .scaledToFit()
     }
 }
 

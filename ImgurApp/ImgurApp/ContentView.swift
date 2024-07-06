@@ -19,21 +19,16 @@ struct ContentView: View {
             if authViewModel.isLoggedIn {
                 VStack {
                     PhotoGalleryView(viewModel: photoGalleryViewModel)
-                    Button("Open Camera") {
-                        isShowingCamera = true
-                    }
-                    .padding()
-                    Button("Upload an image") {
-                        isShowingPhotoPicker = true
-                    }
-                    .padding()
+                    bottomView
                 }
+                .background(Color.baseGreen)
                 .sheet(isPresented: $isShowingCamera) {
                     CameraView(imagePickerViewModel: imagePickerViewModel)
                 }
                 .sheet(isPresented: $isShowingPhotoPicker) {
                     PhotoPickersView(isPresented: $isShowingPhotoPicker, imagePickerViewModel: imagePickerViewModel)
                 }
+                .navigationBarBackButtonHidden(true)
                 .navigationTitle("Photo Gallery")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -42,24 +37,56 @@ struct ContentView: View {
                         }) {
                             Text("Logout")
                         }
+                        .foregroundStyle(.darkGreen)
                     }
                 }
                 .onChange(of: imagePickerViewModel.selectedImage) {
-                    imagePickerViewModel.uploadImage { result in
-                            switch result {
-                                case .success(let imgurImage):
-                                    photoGalleryViewModel.addPhoto(imgurImage)
-                                case .failure(let error):
-                                imagePickerViewModel.errorMessage = error
-                            }
-                    }
+                    handleImageChange()
                 }
             } else {
                 LoginView(authViewModel: authViewModel)
             }
         }
+        .background(Color.customWhite)
         .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
         .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
     }
+    
+    @ViewBuilder private var bottomView: some View {
+        VStack {
+            Button("Open Camera") {
+                isShowingCamera = true
+            }
+            .buttonStyle(GreenButton())
+            .padding()
+            Button("Upload an image") {
+                isShowingPhotoPicker = true
+            }
+            .buttonStyle(GreenButton())
+            .padding()
+        }
+    }
+    
+    private func handleImageChange() {
+        imagePickerViewModel.uploadImage { result in
+            switch result {
+            case .success(let imgurImage):
+                photoGalleryViewModel.addPhoto(imgurImage)
+            case .failure(let error):
+                imagePickerViewModel.errorMessage = error
+            }
+        }
+    }
 }
+
+struct GreenButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color.customGreen)
+            .foregroundColor(.customWhite)
+            .clipShape(Capsule())
+    }
+}
+
 

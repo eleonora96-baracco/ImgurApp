@@ -26,16 +26,7 @@ struct CameraView: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
-//                parent.image = image
                 parent.imagePickerViewModel.selectImageFromCamera(image)
-//                parent.imagePickerViewModel.uploadImage { result in
-//                    switch result {
-//                    case .success(let imgurImage):
-//                        print("Image uploaded successfully: \(imgurImage.link)")
-//                    case .failure(let error):
-//                        print("Error uploading image: \(error.message)")
-//                    }
-//                }
             }
             
             picker.dismiss(animated: true)

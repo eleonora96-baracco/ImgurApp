@@ -30,6 +30,7 @@ class ImagePickerViewModel: ObservableObject {
                 case .success(let imgurImage):
                     completion(.success(imgurImage))
                 case .failure(let error):
+                    self.errorMessage = IdentifiableError(message: error.localizedDescription)
                     completion(.failure(IdentifiableError(message: error.localizedDescription)))
                 }
             }

@@ -3,4 +3,68 @@
    uuid = "E67D13BB-6381-4603-9CDB-41A1D7F52B7B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AFD75FBF-04FB-4BDD-8DBA-139A4BC9A633"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImgurApp/ViewModels/ImagePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "uploadImage(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19F8453C-1033-4CDA-A923-1EEE71D3392E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImgurApp/ViewModels/ImagePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "uploadImage(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "19F8453C-1033-4CDA-A923-1EEE71D3392E - 4ba21f1cf8aa549f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImgurApp.ImagePickerViewModel.uploadImage(completion: (Swift.Result&lt;ImgurApp.ImgurImage, ImgurApp.IdentifiableError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ImgurApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/micheleapicella/Desktop/ImgurApp/ImgurApp/ImgurApp/ViewModels/ImagePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17">
+               </Location>
+               <Location
+                  uuid = "19F8453C-1033-4CDA-A923-1EEE71D3392E - 4ba21f1cf8aa549f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImgurApp.ImagePickerViewModel.uploadImage(completion: (Swift.Result&lt;ImgurApp.ImgurImage, ImgurApp.IdentifiableError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ImgurApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/micheleapicella/Desktop/ImgurApp/ImgurApp/ImgurApp/ViewModels/ImagePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
