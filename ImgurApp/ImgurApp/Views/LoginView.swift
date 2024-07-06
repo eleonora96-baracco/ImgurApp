@@ -17,11 +17,7 @@ struct LoginView: View {
             .onOpenURL { url in
                 authViewModel.handleOAuthCallback(url: url)
             }
-            if let errorMessage = authViewModel.errorMessage {
-                Text(errorMessage.message)
-                    .foregroundColor(.red)
-                    .padding()
-            }
+            .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
         }
     }
 }

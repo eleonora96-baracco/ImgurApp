@@ -19,22 +19,20 @@ struct ContentView: View {
             if authViewModel.isLoggedIn {
                 VStack {
                     PhotoGalleryView(viewModel: photoGalleryViewModel)
-
                     Button("Open Camera") {
                         isShowingCamera = true
                     }
                     .padding()
-                    .sheet(isPresented: $isShowingCamera) {
-                        CameraView(imagePickerViewModel: imagePickerViewModel)
-                    }
-
                     Button("Upload an image") {
                         isShowingPhotoPicker = true
                     }
                     .padding()
-                    .sheet(isPresented: $isShowingPhotoPicker) {
-                        PhotoPickersView(isPresented: $isShowingPhotoPicker, imagePickerViewModel: imagePickerViewModel)
-                    }
+                }
+                .sheet(isPresented: $isShowingCamera) {
+                    CameraView(imagePickerViewModel: imagePickerViewModel)
+                }
+                .sheet(isPresented: $isShowingPhotoPicker) {
+                    PhotoPickersView(isPresented: $isShowingPhotoPicker, imagePickerViewModel: imagePickerViewModel)
                 }
                 .navigationTitle("Photo Gallery")
                 .toolbar {
@@ -60,12 +58,8 @@ struct ContentView: View {
                 LoginView(authViewModel: authViewModel)
             }
         }
-        .alert(item: $authViewModel.errorMessage) { error in
-            Alert(title: Text("Error"), message: Text(error.message), dismissButton: .default(Text("OK")))
-        }
-        .alert(item: $imagePickerViewModel.errorMessage) { error in
-            Alert(title: Text("Error"), message: Text(error.message), dismissButton: .default(Text("OK")))
-        }
+        .overlay(ErrorAlertView(error: $imagePickerViewModel.errorMessage))
+        .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
     }
 }
 
