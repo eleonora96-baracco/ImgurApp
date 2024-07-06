@@ -26,6 +26,17 @@
 		73CD438E2C32CE9800467D82 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD438D2C32CE9800467D82 /* CameraView.swift */; };
 		73CD43912C33019900467D82 /* PhotoPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43902C33019900467D82 /* PhotoPickersView.swift */; };
 		73CD43932C340D1500467D82 /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43922C340D1500467D82 /* ImagePickerViewModel.swift */; };
+		73CFF3382C39489700E04A6F /* KeychainHelperMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3372C39489700E04A6F /* KeychainHelperMocks.swift */; };
+		73CFF33A2C39496400E04A6F /* ImgurAuthenticationServiceInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3392C39496400E04A6F /* ImgurAuthenticationServiceInteractorTests.swift */; };
+		73CFF33C2C39513C00E04A6F /* ImageFetchingServiceProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF33B2C39513C00E04A6F /* ImageFetchingServiceProtocolMock.swift */; };
+		73CFF33E2C39517B00E04A6F /* AuthenticationServiceProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF33D2C39517B00E04A6F /* AuthenticationServiceProtocolMock.swift */; };
+		73CFF3412C39523F00E04A6F /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3402C39523F00E04A6F /* AuthViewModelTests.swift */; };
+		73CFF3432C39528D00E04A6F /* ImagePickerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3422C39528D00E04A6F /* ImagePickerViewModelTests.swift */; };
+		73CFF3452C39548300E04A6F /* PhotoGalleryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3442C39548300E04A6F /* PhotoGalleryViewModelTests.swift */; };
+		73CFF3472C395F5C00E04A6F /* NetworkSessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3462C395F5C00E04A6F /* NetworkSessionWrapper.swift */; };
+		73CFF3492C39677700E04A6F /* ImgurImageMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CFF3482C39677700E04A6F /* ImgurImageMocks.swift */; };
+		73F1637A2C36A8C100B53DD6 /* URLSessionMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F163792C36A8C100B53DD6 /* URLSessionMocks.swift */; };
+		73F1637C2C36A93C00B53DD6 /* ImgurImageServiceInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1637B2C36A93C00B53DD6 /* ImgurImageServiceInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +80,17 @@
 		73CD438F2C32CEE800467D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		73CD43902C33019900467D82 /* PhotoPickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickersView.swift; sourceTree = "<group>"; };
 		73CD43922C340D1500467D82 /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
+		73CFF3372C39489700E04A6F /* KeychainHelperMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelperMocks.swift; sourceTree = "<group>"; };
+		73CFF3392C39496400E04A6F /* ImgurAuthenticationServiceInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAuthenticationServiceInteractorTests.swift; sourceTree = "<group>"; };
+		73CFF33B2C39513C00E04A6F /* ImageFetchingServiceProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchingServiceProtocolMock.swift; sourceTree = "<group>"; };
+		73CFF33D2C39517B00E04A6F /* AuthenticationServiceProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocolMock.swift; sourceTree = "<group>"; };
+		73CFF3402C39523F00E04A6F /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
+		73CFF3422C39528D00E04A6F /* ImagePickerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModelTests.swift; sourceTree = "<group>"; };
+		73CFF3442C39548300E04A6F /* PhotoGalleryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewModelTests.swift; sourceTree = "<group>"; };
+		73CFF3462C395F5C00E04A6F /* NetworkSessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionWrapper.swift; sourceTree = "<group>"; };
+		73CFF3482C39677700E04A6F /* ImgurImageMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImageMocks.swift; sourceTree = "<group>"; };
+		73F163792C36A8C100B53DD6 /* URLSessionMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMocks.swift; sourceTree = "<group>"; };
+		73F1637B2C36A93C00B53DD6 /* ImgurImageServiceInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImageServiceInteractorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +141,7 @@
 		73CD43482C327E7B00467D82 /* ImgurApp */ = {
 			isa = PBXGroup;
 			children = (
+				73D51AE02C35DB160077C798 /* Mocks */,
 				73CD438F2C32CEE800467D82 /* Info.plist */,
 				73CD437D2C3289A100467D82 /* Interactors */,
 				73CD437A2C3288AD00467D82 /* Helpers */,
@@ -145,6 +168,11 @@
 			isa = PBXGroup;
 			children = (
 				73CD435A2C327E7D00467D82 /* ImgurAppTests.swift */,
+				73F1637B2C36A93C00B53DD6 /* ImgurImageServiceInteractorTests.swift */,
+				73CFF3392C39496400E04A6F /* ImgurAuthenticationServiceInteractorTests.swift */,
+				73CFF3402C39523F00E04A6F /* AuthViewModelTests.swift */,
+				73CFF3422C39528D00E04A6F /* ImagePickerViewModelTests.swift */,
+				73CFF3442C39548300E04A6F /* PhotoGalleryViewModelTests.swift */,
 			);
 			path = ImgurAppTests;
 			sourceTree = "<group>";
@@ -192,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				73CD437B2C3288DB00467D82 /* KeychainHelper.swift */,
+				73CFF3462C395F5C00E04A6F /* NetworkSessionWrapper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -203,6 +232,18 @@
 				73CD43812C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift */,
 			);
 			path = Interactors;
+			sourceTree = "<group>";
+		};
+		73D51AE02C35DB160077C798 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				73F163792C36A8C100B53DD6 /* URLSessionMocks.swift */,
+				73CFF3372C39489700E04A6F /* KeychainHelperMocks.swift */,
+				73CFF33B2C39513C00E04A6F /* ImageFetchingServiceProtocolMock.swift */,
+				73CFF33D2C39517B00E04A6F /* AuthenticationServiceProtocolMock.swift */,
+				73CFF3482C39677700E04A6F /* ImgurImageMocks.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,12 +382,18 @@
 				73CD43772C3284C900467D82 /* ImgurImage.swift in Sources */,
 				73CD434C2C327E7B00467D82 /* ContentView.swift in Sources */,
 				73CD43912C33019900467D82 /* PhotoPickersView.swift in Sources */,
+				73CFF33C2C39513C00E04A6F /* ImageFetchingServiceProtocolMock.swift in Sources */,
+				73CFF33E2C39517B00E04A6F /* AuthenticationServiceProtocolMock.swift in Sources */,
+				73CFF3492C39677700E04A6F /* ImgurImageMocks.swift in Sources */,
 				73CD43842C32C80F00467D82 /* PhotoGalleryViewModel.swift in Sources */,
+				73CFF3472C395F5C00E04A6F /* NetworkSessionWrapper.swift in Sources */,
 				73CD437C2C3288DB00467D82 /* KeychainHelper.swift in Sources */,
 				73CD434A2C327E7B00467D82 /* ImgurAppApp.swift in Sources */,
 				73CD43822C32C6DD00467D82 /* ImgurImageFetchingServiceInteractor.swift in Sources */,
 				73CD43932C340D1500467D82 /* ImagePickerViewModel.swift in Sources */,
 				73CD43882C32C9BC00467D82 /* LoginView.swift in Sources */,
+				73F1637A2C36A8C100B53DD6 /* URLSessionMocks.swift in Sources */,
+				73CFF3382C39489700E04A6F /* KeychainHelperMocks.swift in Sources */,
 				73CD438A2C32C9EC00467D82 /* PhotoGalleryView.swift in Sources */,
 				73CD43862C32C88200467D82 /* AuthViewModel.swift in Sources */,
 			);
@@ -356,7 +403,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CFF3452C39548300E04A6F /* PhotoGalleryViewModelTests.swift in Sources */,
+				73CFF3412C39523F00E04A6F /* AuthViewModelTests.swift in Sources */,
 				73CD435B2C327E7D00467D82 /* ImgurAppTests.swift in Sources */,
+				73CFF33A2C39496400E04A6F /* ImgurAuthenticationServiceInteractorTests.swift in Sources */,
+				73CFF3432C39528D00E04A6F /* ImagePickerViewModelTests.swift in Sources */,
+				73F1637C2C36A93C00B53DD6 /* ImgurImageServiceInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

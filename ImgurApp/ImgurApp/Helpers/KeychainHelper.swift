@@ -1,7 +1,13 @@
 import Foundation
 import Security
 
-class KeychainHelper {
+protocol KeychainHelperProtocol {
+    func save(_ value: String, forKey key: String)
+    func get(forKey key: String) -> String?
+    func remove(forKey key: String)
+}
+
+class KeychainHelper: KeychainHelperProtocol {
     static let shared = KeychainHelper()
     
     private init() {}
@@ -40,7 +46,7 @@ class KeychainHelper {
         }
     }
 
-    func delete(forKey key: String) {
+    func remove(forKey key: String) {
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key

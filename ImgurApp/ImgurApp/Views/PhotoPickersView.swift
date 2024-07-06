@@ -18,15 +18,6 @@ struct PhotoPickersView: View {
                 selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
                 let data = try await pickerItem?.loadTransferable(type: Data.self)
                 imagePickerViewModel.selectImageFromFile(data)
-//                imagePickerViewModel.uploadImage {
-//                    result in
-//                    switch result {
-//                    case .success(let imgurImage):
-//                        print("Image uploaded successfully: \(imgurImage.link)")
-//                    case .failure(let error):
-//                        print("Error uploading image: \(error.message)")
-//                    }
-//                }
                 isPresented = false
             }
         }

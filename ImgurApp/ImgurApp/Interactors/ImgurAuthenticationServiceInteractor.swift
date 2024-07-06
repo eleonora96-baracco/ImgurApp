@@ -9,19 +9,24 @@ protocol AuthenticationServiceProtocol {
     func logout()
 }
 
-
 class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
     private let clientId = "2074a13d9af00d6"
     private let authorizationEndpoint = "https://api.imgur.com/oauth2/authorize"
     private let keychainKey = "imgurAccessToken"
-
+    
+    private let keychainHelper: KeychainHelperProtocol
+    
     var isLoggedIn: Bool {
-            return accessToken != nil
-        }
-        
-        var accessToken: String? {
-            return KeychainHelper.shared.get(forKey: keychainKey)
-        }
+        return accessToken != nil
+    }
+    
+    var accessToken: String? {
+        return keychainHelper.get(forKey: keychainKey)
+    }
+    
+    init(keychainHelper: KeychainHelperProtocol = KeychainHelper.shared) {
+        self.keychainHelper = keychainHelper
+    }
 
     func startOAuthFlow() -> URL {
         let authURL = "\(authorizationEndpoint)?client_id=\(clientId)&response_type=token&state=APPLICATION_STATE"
@@ -43,7 +48,7 @@ class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
         }
         
         if let accessToken = params["access_token"] {
-            KeychainHelper.shared.save(accessToken, forKey: keychainKey)
+            keychainHelper.save(accessToken, forKey: keychainKey)
             completion(.success(accessToken))
         } else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Access token not found"])))
@@ -51,6 +56,11 @@ class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
     }
     
     func logout() {
-        UserDefaults.standard.removeObject(forKey: keychainKey)
+        keychainHelper.remove(forKey: keychainKey)
+    }
+    
+    // Internal property for testing
+    internal var testKeychainKey: String {
+        return keychainKey
     }
 }
