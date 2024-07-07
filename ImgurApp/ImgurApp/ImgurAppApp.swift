@@ -7,8 +7,8 @@ struct ImgurAppApp: App {
             let authService = ImgurAuthenticationServiceInteractor()
             let imageFetchingService = ImgurImageFetchingServiceInteractor()
             let authViewModel = AuthViewModel(authenticationService: authService)
-            let photoGalleryViewModel = PhotoGalleryViewModel(imageFetchingServiceInteractor: imageFetchingService, accessToken: authService.accessToken)
-            let imagePickerViewModel = ImagePickerViewModel(imageFetchingService: imageFetchingService, accessToken: authService.accessToken)
+            let photoGalleryViewModel = PhotoGalleryViewModel(imageFetchingServiceInteractor: imageFetchingService)
+            let imagePickerViewModel = ImagePickerViewModel(imageFetchingService: imageFetchingService)
             
             ContentView(authViewModel: authViewModel, photoGalleryViewModel: photoGalleryViewModel, imagePickerViewModel: imagePickerViewModel)
         }

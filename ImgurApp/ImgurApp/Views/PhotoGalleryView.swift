@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PhotoGalleryView: View {
     @ObservedObject var viewModel: PhotoGalleryViewModel
+    var accessToken: String?
     
     let columns = [
         GridItem(.flexible()),
@@ -58,6 +59,7 @@ struct PhotoGalleryView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.customWhite)
         .onAppear {
+            viewModel.accessToken = accessToken
             viewModel.fetchPhotos()
         }
         .overlay(ErrorAlertView(error: $viewModel.errorMessage))

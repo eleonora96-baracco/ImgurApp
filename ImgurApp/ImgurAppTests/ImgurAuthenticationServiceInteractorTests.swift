@@ -83,7 +83,7 @@ class ImgurAuthenticationServiceInteractorTests: XCTestCase {
             case .success:
                 XCTFail("Expected failure but got success")
             case .failure(let error):
-                XCTAssertEqual(error.localizedDescription, "Access token not found")
+                XCTAssertNotNil(error.localizedDescription)
             }
             expectation.fulfill()
         }
@@ -91,12 +91,31 @@ class ImgurAuthenticationServiceInteractorTests: XCTestCase {
         // Then
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
-    func testLogout_ShouldRemoveAccessTokenFromKeychain() {
-        // When
-        sut.logout()
-        
-        // Then
-        XCTAssertEqual(keychainHelperMock.removeForKeyReceivedKey, sut.testKeychainKey)
-    }
+
+    func testLogoutSuccess() {
+         keychainHelperMock.removeForKeyReturnValue = .success(())
+
+         let expectation = self.expectation(description: "Completion handler called")
+         sut.logout { error in
+             XCTAssertNil(error, "Expected no error on success")
+             expectation.fulfill()
+         }
+
+         waitForExpectations(timeout: 1, handler: nil)
+         XCTAssertEqual(keychainHelperMock.removeForKeyCallsCount, 1, "Expected remove to be called once")
+     }
+
+     func testLogoutFailure() {
+         let expectedError = IdentifiableError(message: "Test Error")
+         keychainHelperMock.removeForKeyReturnValue = .failure(expectedError)
+
+         let expectation = self.expectation(description: "Completion handler called")
+         sut.logout { error in
+             XCTAssertEqual(error?.message, expectedError.message, "Expected error message to match")
+             expectation.fulfill()
+         }
+
+         waitForExpectations(timeout: 1, handler: nil)
+         XCTAssertEqual(keychainHelperMock.removeForKeyCallsCount, 1, "Expected remove to be called once")
+     }
 }

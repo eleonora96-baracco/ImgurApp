@@ -5,23 +5,22 @@ class PhotoGalleryViewModel: ObservableObject {
     @Published var errorMessage: IdentifiableError?
     
     private let imageFetchingServiceInteractor: ImageFetchingServiceProtocol
-    private var accessToken: String?
+    @Published var accessToken: String?
 
-    init(imageFetchingServiceInteractor: ImageFetchingServiceProtocol, accessToken: String?) {
+    init(imageFetchingServiceInteractor: ImageFetchingServiceProtocol) {
         self.imageFetchingServiceInteractor = imageFetchingServiceInteractor
-        self.accessToken = accessToken
-        fetchPhotos()
     }
-
+    
     func fetchPhotos() {
-        guard let token = accessToken else { return }
-        imageFetchingServiceInteractor.fetchPhotos(accessToken: token) { [weak self] result in
+        imageFetchingServiceInteractor.fetchPhotos(accessToken: accessToken) {  result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let images):
-                    self?.photos = images
-                case .failure(let error):
-                    self?.errorMessage = IdentifiableError(message: error.localizedDescription)
+                    self.photos = images
+                case .failure(let error as IdentifiableError):
+                    self.errorMessage = error
+                default:
+                    self.errorMessage = IdentifiableError(message: "An unknown error occurred")
                 }
             }
         }
@@ -41,8 +40,10 @@ class PhotoGalleryViewModel: ObservableObject {
                 switch result {
                 case .success:
                     self.photos.remove(at: index)
-                case .failure(let error):
-                    self.errorMessage = IdentifiableError(message: error.localizedDescription)
+                case .failure(let error as IdentifiableError):
+                    self.errorMessage = error
+                default:
+                    self.errorMessage = IdentifiableError(message: "An unknown error occurred")
                 }
             }
         }

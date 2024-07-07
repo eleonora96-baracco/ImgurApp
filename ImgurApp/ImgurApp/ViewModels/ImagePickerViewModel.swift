@@ -6,21 +6,24 @@ class ImagePickerViewModel: ObservableObject {
     @Published var errorMessage: IdentifiableError?
 
     private let imageFetchingService: ImageFetchingServiceProtocol
-    private let accessToken: String?
 
-    init(imageFetchingService: ImageFetchingServiceProtocol, accessToken: String?) {
+    init(imageFetchingService: ImageFetchingServiceProtocol) {
         self.imageFetchingService = imageFetchingService
-        self.accessToken = accessToken
+
     }
 
-    func uploadImage(completion: @escaping (Result<ImgurImage, IdentifiableError>) -> Void) {
-        guard let selectedImage = selectedImage, let accessToken = accessToken else {
-            completion(.failure(IdentifiableError(message: "No image selected or user not authenticated")))
+    func uploadImage(accessToken: String?, completion: @escaping (Result<ImgurImage, IdentifiableError>) -> Void) {
+        guard let selectedImage = selectedImage else {
+            let error = IdentifiableError(message: "No image selected")
+            errorMessage = error
+            completion(.failure(error))
             return
         }
 
         guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
-            completion(.failure(IdentifiableError(message: "Failed to convert image to data")))
+            let error = IdentifiableError(message: "Failed to convert image to data")
+            errorMessage = error
+            completion(.failure(error))
             return
         }
 
@@ -29,9 +32,13 @@ class ImagePickerViewModel: ObservableObject {
                 switch result {
                 case .success(let imgurImage):
                     completion(.success(imgurImage))
-                case .failure(let error):
-                    self.errorMessage = IdentifiableError(message: error.localizedDescription)
-                    completion(.failure(IdentifiableError(message: error.localizedDescription)))
+                case .failure(let error as IdentifiableError):
+                    self.errorMessage = error
+                    completion(.failure(error))
+                default:
+                    let error = IdentifiableError(message: "Unknown error")
+                    self.errorMessage = error
+                    completion(.failure(error))
                 }
             }
         }
@@ -42,7 +49,10 @@ class ImagePickerViewModel: ObservableObject {
     }
 
     func selectImageFromFile(_ data: Data?) {
-        guard let data else { return }
+        guard let data = data else {
+            errorMessage = IdentifiableError(message: "No data provided")
+            return
+        }
         if let image = UIImage(data: data) {
             selectedImage = image
         } else {

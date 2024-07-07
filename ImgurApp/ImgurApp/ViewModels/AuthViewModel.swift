@@ -18,26 +18,38 @@ class AuthViewModel: ObservableObject {
     }
 
     func handleOAuthCallback(url: URL) {
-        authenticationService.handleOAuthCallback(url: url) { [weak self] result in
+        authenticationService.handleOAuthCallback(url: url) { result in
             switch result {
                 case .success(let token):
                     DispatchQueue.main.async {
-                        self?.isLoggedIn = true
-                        self?.accessToken = token
+                        self.isLoggedIn = true
+                        self.accessToken = token
+                        
                     }
-                case .failure(let error):
+                case .failure(let error as IdentifiableError):
                     DispatchQueue.main.async {
-                        self?.isLoggedIn = false
-                        self?.errorMessage = IdentifiableError(message: error.localizedDescription)
+                        self.isLoggedIn = false
+                        self.errorMessage = error
                     }
+            default:
+                DispatchQueue.main.async {
+                    self.isLoggedIn = false
+                    self.errorMessage = IdentifiableError(message: "An unknown error occurred")
+                }
             }
         }
     }
 
     func logout() {
-        authenticationService.logout()
-        isLoggedIn = false
-        accessToken = nil
+        authenticationService.logout { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.errorMessage = error
+                }
+            }
+        }
+        self.isLoggedIn = false
+        self.accessToken = nil
     }
 }
 

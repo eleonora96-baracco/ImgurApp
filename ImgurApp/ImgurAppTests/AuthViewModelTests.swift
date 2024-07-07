@@ -77,7 +77,7 @@ class AuthViewModelTests: XCTestCase {
         DispatchQueue.main.async {
             XCTAssertFalse(self.sut.isLoggedIn)
             XCTAssertNil(self.sut.accessToken)
-            XCTAssertEqual(self.sut.errorMessage?.message, "Failed to handle OAuth callback")
+            XCTAssertEqual(self.sut.errorMessage?.message, "An unknown error occurred")
             expectation.fulfill()
         }
 

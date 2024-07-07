@@ -10,7 +10,8 @@ class PhotoGalleryViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         imageFetchingServiceMock = ImageFetchingServiceProtocolMock()
-        viewModel = PhotoGalleryViewModel(imageFetchingServiceInteractor: imageFetchingServiceMock, accessToken: "test_token")
+        viewModel = PhotoGalleryViewModel(imageFetchingServiceInteractor: imageFetchingServiceMock)
+        viewModel.accessToken = "test_token"
     }
 
     override func tearDown() {
@@ -49,7 +50,7 @@ class PhotoGalleryViewModelTests: XCTestCase {
         viewModel.fetchPhotos()
         
         DispatchQueue.main.async {
-            XCTAssertEqual(self.viewModel.errorMessage?.message, "Failed to fetch photos")
+            XCTAssertEqual(self.viewModel.errorMessage?.message, "An unknown error occurred")
             expectation.fulfill()
         }
 
@@ -105,7 +106,7 @@ class PhotoGalleryViewModelTests: XCTestCase {
 
         DispatchQueue.main.async {
             XCTAssertEqual(self.viewModel.photos.count, 1)
-            XCTAssertEqual(self.viewModel.errorMessage?.message, "Failed to delete photo")
+            XCTAssertEqual(self.viewModel.errorMessage?.message, "An unknown error occurred")
             expectation.fulfill()
         }
 

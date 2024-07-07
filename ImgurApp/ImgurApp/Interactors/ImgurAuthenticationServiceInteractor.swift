@@ -6,7 +6,7 @@ protocol AuthenticationServiceProtocol {
     
     func startOAuthFlow() -> URL
     func handleOAuthCallback(url: URL, completion: @escaping (Result<String, Error>) -> Void)
-    func logout()
+    func logout(completion: @escaping (IdentifiableError?) -> Void)
 }
 
 class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
@@ -36,7 +36,7 @@ class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
     func handleOAuthCallback(url: URL, completion: @escaping (Result<String, Error>) -> Void) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let fragment = components.fragment else {
-            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            completion(.failure(IdentifiableError(message: "An error occurred during the login. Please, retry!")))
             return
         }
         
@@ -48,15 +48,25 @@ class ImgurAuthenticationServiceInteractor: AuthenticationServiceProtocol {
         }
         
         if let accessToken = params["access_token"] {
-            keychainHelper.save(accessToken, forKey: keychainKey)
-            completion(.success(accessToken))
+            switch keychainHelper.save(accessToken, forKey: keychainKey) {
+            case .success:
+                completion(.success(accessToken))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+            
         } else {
-            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Access token not found"])))
+            completion(.failure(IdentifiableError(message: "Access token not found")))
         }
     }
     
-    func logout() {
-        keychainHelper.remove(forKey: keychainKey)
+    func logout(completion: @escaping (IdentifiableError?) -> Void) {
+        switch keychainHelper.remove(forKey: keychainKey) {
+        case .success:
+            completion(nil)
+        case .failure(let error):
+            completion(error)
+        }
     }
     
     // Internal property for testing

@@ -1,5 +1,3 @@
-import Foundation
-
 class KeychainHelperProtocolMock: KeychainHelperProtocol {
 
     // MARK: - save
@@ -10,13 +8,14 @@ class KeychainHelperProtocolMock: KeychainHelperProtocol {
     }
     var saveForKeyReceivedArguments: (value: String, key: String)?
     var saveForKeyReceivedInvocations: [(value: String, key: String)] = []
-    var saveForKeyClosure: ((String, String) -> Void)?
+    var saveForKeyClosure: ((String, String) -> Result<Void, IdentifiableError>)?
+    var saveForKeyReturnValue: Result<Void, IdentifiableError> = .success(())
 
-    func save(_ value: String, forKey key: String) {
+    func save(_ value: String, forKey key: String) -> Result<Void, IdentifiableError> {
         saveForKeyCallsCount += 1
         saveForKeyReceivedArguments = (value: value, key: key)
         saveForKeyReceivedInvocations.append((value: value, key: key))
-        saveForKeyClosure?(value, key)
+        return saveForKeyClosure?(value, key) ?? saveForKeyReturnValue
     }
 
     // MARK: - get
@@ -45,13 +44,13 @@ class KeychainHelperProtocolMock: KeychainHelperProtocol {
     }
     var removeForKeyReceivedKey: String?
     var removeForKeyReceivedInvocations: [String] = []
-    var removeForKeyClosure: ((String) -> Void)?
+    var removeForKeyClosure: ((String) -> Result<Void, IdentifiableError>)?
+    var removeForKeyReturnValue: Result<Void, IdentifiableError> = .success(())
 
-    func remove(forKey key: String) {
+    func remove(forKey key: String) -> Result<Void, IdentifiableError> {
         removeForKeyCallsCount += 1
         removeForKeyReceivedKey = key
         removeForKeyReceivedInvocations.append(key)
-        removeForKeyClosure?(key)
+        return removeForKeyClosure?(key) ?? removeForKeyReturnValue
     }
 }
-

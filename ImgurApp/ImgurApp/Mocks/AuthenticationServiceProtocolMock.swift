@@ -62,10 +62,10 @@ class AuthenticationServiceProtocolMock: AuthenticationServiceProtocol {
     var logoutCalled: Bool {
         return logoutCallsCount > 0
     }
-    var logoutClosure: (() -> Void)?
+    var logoutCompletion: ((IdentifiableError?) -> Void)?
 
-    func logout() {
+    func logout(completion: @escaping (IdentifiableError?) -> Void) {
         logoutCallsCount += 1
-        logoutClosure?()
+        logoutCompletion = completion
     }
 }

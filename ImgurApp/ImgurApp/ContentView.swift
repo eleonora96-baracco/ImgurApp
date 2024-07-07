@@ -18,7 +18,7 @@ struct ContentView: View {
         NavigationView {
             if authViewModel.isLoggedIn {
                 VStack {
-                    PhotoGalleryView(viewModel: photoGalleryViewModel)
+                    PhotoGalleryView(viewModel: photoGalleryViewModel, accessToken: authViewModel.accessToken )
                     bottomView
                 }
                 .shadow(radius: 5)
@@ -50,6 +50,7 @@ struct ContentView: View {
                 .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
             }
         }
+        .overlay(ErrorAlertView(error: $authViewModel.errorMessage))
         .background(Color.customWhite)
         
     }
@@ -70,7 +71,7 @@ struct ContentView: View {
     }
     
     private func handleImageChange() {
-        imagePickerViewModel.uploadImage { result in
+        imagePickerViewModel.uploadImage(accessToken: authViewModel.accessToken) { result in
             switch result {
             case .success(let imgurImage):
                 photoGalleryViewModel.addPhoto(imgurImage)

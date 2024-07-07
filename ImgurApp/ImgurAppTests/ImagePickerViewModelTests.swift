@@ -10,7 +10,7 @@ class ImagePickerViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         imageFetchingServiceMock = ImageFetchingServiceProtocolMock()
-        viewModel = ImagePickerViewModel(imageFetchingService: imageFetchingServiceMock, accessToken: "test_token")
+        viewModel = ImagePickerViewModel(imageFetchingService: imageFetchingServiceMock)
     }
 
     override func tearDown() {
@@ -29,8 +29,9 @@ class ImagePickerViewModelTests: XCTestCase {
         imageFetchingServiceMock.uploadPhotoAccessTokenImageDataCompletionClosure = { _, _, completion in
             completion(.success(testImgurImage))
         }
+        let accessToken = "test_token"
 
-        viewModel.uploadImage { result in
+        viewModel.uploadImage(accessToken: accessToken) { result in
             switch result {
             case .success(let imgurImage):
                 XCTAssertEqual(imgurImage.id, testImgurImage.id)
@@ -45,13 +46,14 @@ class ImagePickerViewModelTests: XCTestCase {
 
     func testUploadImage_NoSelectedImage() {
         let expectation = self.expectation(description: "Image upload should fail due to no selected image")
+        let accessToken = "test_token"
 
-        viewModel.uploadImage { result in
+        viewModel.uploadImage(accessToken: accessToken) { result in
             switch result {
             case .success:
                 XCTFail("Expected failure but got success")
             case .failure(let error):
-                XCTAssertEqual(error.message, "No image selected or user not authenticated")
+                XCTAssertEqual(error.message, "No image selected")
                 expectation.fulfill()
             }
         }
