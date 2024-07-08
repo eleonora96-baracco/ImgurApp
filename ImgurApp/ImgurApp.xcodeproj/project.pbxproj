@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7362F8F52C3BBDB900020156 /* ContentViewUItest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362F8F42C3BBDB900020156 /* ContentViewUItest.swift */; };
 		73CD434A2C327E7B00467D82 /* ImgurAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD43492C327E7B00467D82 /* ImgurAppApp.swift */; };
 		73CD434C2C327E7B00467D82 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD434B2C327E7B00467D82 /* ContentView.swift */; };
 		73CD434E2C327E7D00467D82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73CD434D2C327E7D00467D82 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7362F8F42C3BBDB900020156 /* ContentViewUItest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewUItest.swift; sourceTree = "<group>"; };
 		73CD43462C327E7B00467D82 /* ImgurApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImgurApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73CD43492C327E7B00467D82 /* ImgurAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurAppApp.swift; sourceTree = "<group>"; };
 		73CD434B2C327E7B00467D82 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				73CD43642C327E7E00467D82 /* ImgurAppUITests.swift */,
 				73CD43662C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift */,
+				7362F8F42C3BBDB900020156 /* ContentViewUItest.swift */,
 			);
 			path = ImgurAppUITests;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7362F8F52C3BBDB900020156 /* ContentViewUItest.swift in Sources */,
 				73CD43672C327E7E00467D82 /* ImgurAppUITestsLaunchTests.swift in Sources */,
 				73CD43652C327E7E00467D82 /* ImgurAppUITests.swift in Sources */,
 			);
@@ -627,6 +631,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S2BF7K8C4H;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -646,6 +651,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S2BF7K8C4H;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -664,6 +670,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S2BF7K8C4H;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = EB.ImgurAppUITests;
@@ -681,6 +688,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S2BF7K8C4H;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = EB.ImgurAppUITests;

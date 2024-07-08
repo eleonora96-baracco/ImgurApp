@@ -10,6 +10,7 @@ struct LoginView: View {
                 .font(.largeTitle)
                 .padding()
                 .foregroundColor(.darkGreen)
+                .accessibilityIdentifier("LoginViewTitle")
             
             Button("Login with Imgur") {
                 let authURL = authViewModel.startOAuthFlow()
@@ -19,6 +20,7 @@ struct LoginView: View {
             .background(.customGreen)
             .foregroundColor(.white)
             .cornerRadius(10)
+            .accessibilityIdentifier("LoginButton")
             
             .onOpenURL { url in
                 authViewModel.handleOAuthCallback(url: url)
